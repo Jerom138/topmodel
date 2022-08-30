@@ -17,11 +17,10 @@ class:
         class: Utilisateur
         exclude:
           - ProfilId
-          - dateCreation
-          - dateModification
+          - DateCreation
+          - DateModification
       
       required: true
-      prefix: true
     - composition: UtilisateurDto
       name: UtilisateurParent
       comment: UtilisateurParent

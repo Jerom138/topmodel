@@ -11,8 +11,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 import topmodel.exemple.name.dao.dtos.utilisateur.interfaces.IUtilisateurDto;
-import topmodel.exemple.name.dao.entities.utilisateur.TypeUtilisateur;
-import topmodel.exemple.name.dao.entities.utilisateur.Utilisateur;
 
 /**
  * Objet non persisté de communication avec le serveur.
@@ -24,13 +22,12 @@ public class UtilisateurDto implements Serializable, IUtilisateurDto {
 
 	/**
 	 * Id technique.
-	 * Alias of {@link topmodel.exemple.name.dao.entities.utilisateur.Utilisateur#getId() Utilisateur#getId()} 
 	 */
+	@NotNull
 	private long id;
 
 	/**
 	 * Email de l'utilisateur.
-	 * Alias of {@link topmodel.exemple.name.dao.entities.utilisateur.Utilisateur#getEmail() Utilisateur#getEmail()} 
 	 */
 	@NotNull
 	@Email
@@ -38,10 +35,9 @@ public class UtilisateurDto implements Serializable, IUtilisateurDto {
 
 	/**
 	 * Type d'utilisateur en Many to one.
-	 * Alias of {@link topmodel.exemple.name.dao.entities.utilisateur.Utilisateur#getTypeUtilisateurCode() Utilisateur#getTypeUtilisateurCode()} 
 	 */
 	@NotNull
-	private TypeUtilisateur.Values typeUtilisateurCode;
+	private String typeUtilisateurCode;
 
 	/**
 	 * UtilisateurParent.
@@ -76,38 +72,11 @@ public class UtilisateurDto implements Serializable, IUtilisateurDto {
 	 * @param typeUtilisateurCode Type d'utilisateur en Many to one
 	 * @param utilisateurParent UtilisateurParent
 	 */
-	public UtilisateurDto(long id, String email, TypeUtilisateur.Values typeUtilisateurCode, UtilisateurDto utilisateurParent) {
+	public UtilisateurDto(long id, String email, String typeUtilisateurCode, UtilisateurDto utilisateurParent) {
 		this.id = id;
 		this.email = email;
 		this.typeUtilisateurCode = typeUtilisateurCode;
 		this.utilisateurParent = utilisateurParent;
-	}
-
-	/**
-	 * Crée une nouvelle instance de 'UtilisateurDto'.
-	 * @param utilisateur Instance de 'Utilisateur'.
-	 *
-	 * @return Une nouvelle instance de 'UtilisateurDto'.
-	 */
-	public UtilisateurDto(Utilisateur utilisateur) {
-		this.from(utilisateur);
-	}
-
-	/**
-	 * Map les champs des classes passées en paramètre dans l'instance courante.
-	 * @param utilisateur Instance de 'Utilisateur'.
-	 */
-	protected void from(Utilisateur utilisateur) {
-		if(utilisateur != null) {
-			this.id = utilisateur.getId();
-			this.email = utilisateur.getEmail();
-
-			if(utilisateur.getTypeUtilisateur() != null) {
-				this.typeUtilisateurCode = utilisateur.getTypeUtilisateur().getCode();
-			}
-
-		}
-
 	}
 
 	/**
@@ -136,7 +105,7 @@ public class UtilisateurDto implements Serializable, IUtilisateurDto {
 	 * @return value of {@link topmodel.exemple.name.dao.dtos.utilisateur.UtilisateurDto#typeUtilisateurCode typeUtilisateurCode}.
 	 */
 	@Override
-	public TypeUtilisateur.Values getTypeUtilisateurCode() {
+	public String getTypeUtilisateurCode() {
 		return this.typeUtilisateurCode;
 	}
 
@@ -170,7 +139,7 @@ public class UtilisateurDto implements Serializable, IUtilisateurDto {
 	 * Set the value of {@link topmodel.exemple.name.dao.dtos.utilisateur.UtilisateurDto#typeUtilisateurCode typeUtilisateurCode}.
 	 * @param typeUtilisateurCode value to set
 	 */
-	public void setTypeUtilisateurCode(TypeUtilisateur.Values typeUtilisateurCode) {
+	public void setTypeUtilisateurCode(String typeUtilisateurCode) {
 		this.typeUtilisateurCode = typeUtilisateurCode;
 	}
 
@@ -180,21 +149,5 @@ public class UtilisateurDto implements Serializable, IUtilisateurDto {
 	 */
 	public void setUtilisateurParent(UtilisateurDto utilisateurParent) {
 		this.utilisateurParent = utilisateurParent;
-	}
-
-	/**
-	 * Mappe 'UtilisateurDto' vers 'Utilisateur'.
-	 * @param source Instance de 'UtilisateurDto'.
-	 * @param dest Instance pré-existante de 'Utilisateur'. Une nouvelle instance sera créée si non spécifié.
-	 *
-	 * @return Une instance de 'Utilisateur'.
-	 */
-	public Utilisateur toUtilisateur(Utilisateur dest) {
-		dest = dest == null ? new Utilisateur() : dest;
-
-		dest.setId(this.getId());
-		dest.setEmail(this.getEmail());
-
-		return dest;
 	}
 }

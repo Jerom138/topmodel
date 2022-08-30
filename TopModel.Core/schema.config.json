@@ -366,6 +366,50 @@
           "modelOutputDirectory": {
             "type": "string",
             "description": "Dossier de sortie pour les fichiers topmodel."
+          },
+          "tag": {
+            "type": "string",
+            "description": "Tags à placer sur les fichiers générés."
+          },
+          "domains": {
+            "type":"array",
+            "description": "Liste des équivalences pour les domaines",
+            "items": {
+              "type":"object",
+              "description": "Equivalence pour un domaine",
+              "properties": {
+                "from":{
+                  "type": "string",
+                  "description": "Nom du domaine dans le modèle d'origine"
+                },
+                "to":{
+                  "type": "string",
+                  "description": "Nom du domaine dans le modèle de destination"
+                }
+              }
+            }
+          },
+          "decorators": {
+            "type":"array",
+            "description": "Liste des équivalences pour les décorateurs",
+            "items": {
+              "type":"object",
+              "description": "Equivalence pour un décoarteur",
+              "properties": {
+                "from":{
+                  "type": "string",
+                  "description": "Nom du décorateur dans le modèle d'origine"
+                },
+                "to":{
+                  "type": "string",
+                  "description": "Nom du décorateur dans le modèle de destination"
+                },
+                "import":{
+                  "type": "string",
+                  "description": "Import du décorateur dans le modèle de destination"
+                }
+              }
+            }
           }
         }
       }

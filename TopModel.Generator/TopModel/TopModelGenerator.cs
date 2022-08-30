@@ -57,17 +57,18 @@ public class TopModelGenerator : GeneratorBase
         fw.WriteLine("---");
         fw.WriteLine($"module: {file.Module}");
         fw.WriteLine($"tags:");
-        file.Tags.ForEach(t =>
-        {
-            fw.WriteLine($"  - {t}");
-        });
-
-        if (file.Uses.Any(u => this._files.Any(f => f.Key == u.ReferenceName)))
+        fw.WriteLine($"  - {_config.Tag}");
+        var hasDecoratorImport = file.Classes.SelectMany(c => c.Decorators).Any(d => _config.Decorators.Any(cd => cd.From == d.Name.ToString()));
+        if (file.Uses.Any(u => this._files.Any(f => f.Key == u.ReferenceName)) || hasDecoratorImport)
         {
             fw.WriteLine($"uses:");
             file.Uses.Where(u => this._files.Any(f => f.Key == u.ReferenceName)).ToList().ForEach(u =>
             {
                 fw.WriteLine($"  - {u.ReferenceName}");
+            });
+            file.Classes.SelectMany(c => c.Decorators).Select(d => _config.Decorators.Find(cd => cd.From == d.Name.ToString())).Where(d => d != null).ToList().ForEach(d =>
+            {
+                fw.WriteLine($"  - {d!.Import}");
             });
         }
 
@@ -115,7 +116,7 @@ public class TopModelGenerator : GeneratorBase
             fw.WriteLine($"  pluralName: {classe.PluralName}");
         }
 
-        if (classe.SqlName != null)
+        if (classe.SqlName != null && classe.IsPersistent)
         {
             fw.WriteLine($"  sqlName: {classe.SqlName}");
         }
@@ -125,7 +126,13 @@ public class TopModelGenerator : GeneratorBase
             fw.WriteLine($"  decorators:");
             classe.Decorators.ForEach(d =>
             {
-                fw.WriteLine($"    - {d.Name}");
+                var deco = d.Name.ToString();
+                if (_config.Decorators.Any(d => d.From == deco))
+                {
+                    deco = _config.Decorators.Find(d => d.From == deco)!.To;
+                }
+
+                fw.WriteLine($"    - {deco}");
             });
         }
 
@@ -148,35 +155,9 @@ public class TopModelGenerator : GeneratorBase
         WriteMappers(classe, fw);
     }
 
-    private void WriteProperty(IProperty property, FileWriter fw, bool isList = true, bool skipPrimaryKey = false)
+    private void WriteProperty(IProperty property, FileWriter fw, bool isList = true)
     {
-        if (property is RegularProperty rp)
-        {
-            fw.WriteLine();
-            fw.WriteLine($"    - name: {rp.Name}");
-            fw.WriteLine($"      comment: {rp.Comment}");
-            fw.WriteLine($"      domain: {rp.Domain.Name}");
-            if (rp.Label != null)
-            {
-                fw.WriteLine($"      label: {rp.Label}");
-            }
-
-            if (rp.DefaultValue != null)
-            {
-                fw.WriteLine($"      label: {rp.DefaultValue}");
-            }
-
-            if (rp.PrimaryKey && !skipPrimaryKey)
-            {
-                fw.WriteLine($"      primaryKey: true");
-            }
-
-            if (rp.Required)
-            {
-                fw.WriteLine($"      required: true");
-            }
-        }
-        else if (property is CompositionProperty cp)
+        if (property is CompositionProperty cp)
         {
             if (!IsAvailable(cp.Composition))
             {
@@ -220,17 +201,6 @@ public class TopModelGenerator : GeneratorBase
                 fw.WriteLine($"      required: {(ap.Required ? "true" : "false")}");
             }
         }
-        else if (property is AliasProperty ap2)
-        {
-            if (ap2.Property is AssociationProperty asp)
-            {
-                WriteProperty(asp.Association.PrimaryKey!, fw, isList, true);
-            }
-            else
-            {
-                WriteProperty(ap2.Property, fw, isList, ap2.Prefix == null && ap2.Suffix == null);
-            }
-        }
         else if (property is AssociationProperty asp && this._files.Any(f => asp.Association != null && f.Key == asp.Association.ModelFile.Name))
         {
             fw.WriteLine();
@@ -241,9 +211,38 @@ public class TopModelGenerator : GeneratorBase
                 fw.WriteLine($"      type: {asp.Type}");
             }
         }
-        else if (property is AssociationProperty asp2)
+        else if (property is IFieldProperty rp)
         {
-            WriteProperty(asp2.Association.PrimaryKey!, fw, true);
+            var domain = rp.Domain.Name.ToString();
+
+            if (_config.Domains.Any(d => d.From == rp.Domain.Name))
+            {
+                domain = _config.Domains.Where(d => d.From == rp.Domain.Name).First().To;
+            }
+
+            fw.WriteLine();
+            fw.WriteLine($"    - name: {rp.Name}");
+            fw.WriteLine($"      comment: {rp.Comment}");
+            fw.WriteLine($"      domain: {domain}");
+            if (rp.Label != null)
+            {
+                fw.WriteLine($"      label: {rp.Label}");
+            }
+
+            if (rp.DefaultValue != null)
+            {
+                fw.WriteLine($"      label: {rp.DefaultValue}");
+            }
+
+            if (rp.PrimaryKey && !(rp is AliasProperty))
+            {
+                fw.WriteLine($"      primaryKey: true");
+            }
+
+            if (rp.Required)
+            {
+                fw.WriteLine($"      required: true");
+            }
         }
     }
 

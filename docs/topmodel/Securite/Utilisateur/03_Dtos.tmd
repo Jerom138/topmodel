@@ -5,45 +5,36 @@
 ---
 module: Utilisateur
 tags:
-  - dto
+  - autoTag
 uses:
-  - Securite/Utilisateur/02_Entities
+  - Decorators
 
 ---
 class:
   name: UtilisateurDto
   comment: Objet non persisté de communication avec le serveur
   label: Utilisateur
-  sqlName: UTILISATEUR_DTO
   decorators:
-    - Interface
+    - InterfaceDest
   properties:
 
-    - alias:
-        class: Utilisateur
-        property: Id
-      prefix: Utilisateur
-
-    - alias:
-        class: Utilisateur
-        property: Email
-      prefix: Utilisateur
+    - name: Id
+      comment: Id technique
+      domain: DO_ID_DEST
+      label: Id technique
       required: true
 
-    - alias:
-        class: Utilisateur
-        property: TypeUtilisateurCode
-      prefix: Utilisateur
+    - name: Email
+      comment: Email de l'utilisateur
+      domain: DO_EMAIL
+      required: true
+
+    - name: TypeUtilisateurCode
+      comment: Type d'utilisateur en Many to one
+      domain: DO_CODE
       required: true
 
     - composition: UtilisateurDto
       name: UtilisateurParent
       comment: UtilisateurParent
       kind: object
-
-  mappers:
-    to:
-      - class: Utilisateur
-    from:
-      - params:
-        - class: Utilisateur

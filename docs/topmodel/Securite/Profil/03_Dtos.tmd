@@ -5,34 +5,27 @@
 ---
 module: Securite
 tags:
-  - dto
+  - autoTag
 uses:
-  - Securite/Profil/02_Entities
   - Securite/Utilisateur/03_Dtos
 
 ---
 class:
   name: ProfilDto
   comment: Objet métier non persisté représentant Profil
-  sqlName: PROFIL_DTO
   properties:
 
-    - alias:
-        class: Profil
-        property: Id
+    - name: Id
+      comment: Id technique
+      domain: DO_ID_DEST
+      label: Id technique du profil
+      required: true
 
-    - alias:
-        class: Profil
-        property: TypeProfilCode
+    - name: TypeProfilCode
+      comment: Type de profil
+      domain: DO_CODE
 
     - composition: UtilisateurDto
       name: utilisateurs
       comment: Liste paginée des utilisateurs de ce profil
       kind: list
-
-  mappers:
-    to:
-      - class: Profil
-    from:
-      - params:
-        - class: Profil

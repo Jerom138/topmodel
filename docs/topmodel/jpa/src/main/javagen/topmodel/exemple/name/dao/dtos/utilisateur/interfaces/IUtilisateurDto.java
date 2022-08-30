@@ -8,7 +8,6 @@ import javax.annotation.Generated;
 import javax.validation.constraints.Email;
 
 import topmodel.exemple.name.dao.dtos.utilisateur.UtilisateurDto;
-import topmodel.exemple.name.dao.entities.utilisateur.TypeUtilisateur;
 
 @Generated("TopModel : https://github.com/klee-contrib/topmodel")
 public interface IUtilisateurDto {
@@ -32,7 +31,7 @@ public interface IUtilisateurDto {
 	 *
 	 * @return value of {@link topmodel.exemple.name.dao.dtos.utilisateur.UtilisateurDto#typeUtilisateurCode typeUtilisateurCode}.
 	 */
-	TypeUtilisateur.Values getTypeUtilisateurCode();
+	String getTypeUtilisateurCode();
 
 	/**
 	 * Getter for utilisateurParent.

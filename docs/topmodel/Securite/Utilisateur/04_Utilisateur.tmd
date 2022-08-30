@@ -5,9 +5,8 @@
 ---
 module: Securite.Utilisateur
 tags:
-  - dto
+  - autoTag
 uses:
-  - Securite/Utilisateur/02_Entities
   - Securite/Utilisateur/03_Dtos
 
 ---
@@ -18,9 +17,11 @@ endpoint:
   description: Charge le détail d'un utilisateur
   params:
 
-    - alias:
-        class: Utilisateur
-        property: Id
+    - name: Id
+      comment: Id technique
+      domain: DO_ID_DEST
+      label: Id technique
+      required: true
 
   returns:
 
@@ -37,9 +38,9 @@ endpoint:
   description: Charge une liste d'utilisateurs par leur type
   params:
 
-    - alias:
-        class: Utilisateur
-        property: TypeUtilisateurCode
+    - name: TypeUtilisateurCode
+      comment: Type d'utilisateur en Many to one
+      domain: DO_CODE
 
   returns:
 
@@ -98,16 +99,16 @@ endpoint:
 
     - alias:
         class: UtilisateurDto
-        property: UtilisateurId
+        property: Id
 
     - alias:
         class: UtilisateurDto
-        property: UtilisateurEmail
+        property: Email
       required: true
 
     - alias:
         class: UtilisateurDto
-        property: UtilisateurTypeUtilisateurCode
+        property: TypeUtilisateurCode
       required: true
 
   returns:

@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import topmodel.exemple.name.dao.dtos.utilisateur.UtilisateurDto;
-import topmodel.exemple.name.dao.entities.utilisateur.TypeUtilisateur;
 
 @Generated("TopModel : https://github.com/klee-contrib/topmodel")
 public interface IUtilisateurController {
@@ -26,11 +25,11 @@ public interface IUtilisateurController {
 
 	/**
 	 * Charge le détail d'un utilisateur.
-	 * @param utiId Id technique
+	 * @param id Id technique
 	 * @return Le détail de l'utilisateur
 	 */
 	@GetMapping(path = "utilisateur/{utilisateurId}")
-	UtilisateurDto getUtilisateur(@RequestParam(value = "utiId", required = true) long utiId);
+	UtilisateurDto getUtilisateur(@RequestParam(value = "id", required = true) long id);
 
 	/**
 	 * Charge une liste d'utilisateurs par leur type.
@@ -38,7 +37,7 @@ public interface IUtilisateurController {
 	 * @return Liste des utilisateurs
 	 */
 	@GetMapping(path = "utilisateur/list")
-	List<UtilisateurDto> getUtilisateurList(@RequestParam(value = "typeUtilisateurCode", required = false) TypeUtilisateur.Values typeUtilisateurCode);
+	List<UtilisateurDto> getUtilisateurList(@RequestParam(value = "typeUtilisateurCode", required = false) String typeUtilisateurCode);
 
 	/**
 	 * Sauvegarde un utilisateur.
@@ -58,11 +57,11 @@ public interface IUtilisateurController {
 
 	/**
 	 * Recherche des utilisateurs.
-	 * @param utiId Id technique
+	 * @param id Id technique
 	 * @param email Email de l'utilisateur
 	 * @param typeUtilisateurCode Type d'utilisateur en Many to one
 	 * @return Utilisateurs matchant les critères
 	 */
 	@PostMapping(path = "utilisateur/search")
-	Page<UtilisateurDto> search(@RequestParam(value = "utiId", required = true) long utiId, @RequestParam(value = "email", required = true) String email, @RequestParam(value = "typeUtilisateurCode", required = true) TypeUtilisateur.Values typeUtilisateurCode);
+	Page<UtilisateurDto> search(@RequestParam(value = "id", required = true) long id, @RequestParam(value = "email", required = true) String email, @RequestParam(value = "typeUtilisateurCode", required = true) String typeUtilisateurCode);
 }

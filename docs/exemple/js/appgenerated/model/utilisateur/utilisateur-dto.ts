@@ -7,30 +7,30 @@ import {DO_CODE, DO_EMAIL, DO_ID} from "@domains";
 import {TypeUtilisateurCode} from "./references";
 
 export interface UtilisateurDto {
-    utilisateurId?: number,
-    utilisateurEmail?: string,
-    utilisateurTypeUtilisateurCode?: TypeUtilisateurCode,
+    id?: number,
+    email?: string,
+    typeUtilisateurCode?: TypeUtilisateurCode,
     utilisateurParent?: UtilisateurDto
 }
 
 export const UtilisateurDtoEntity = {
-    utilisateurId: {
+    id: {
         type: "field",
-        name: "utilisateurId",
+        name: "id",
         domain: DO_ID,
-        isRequired: true,
+        isRequired: false,
         label: "utilisateur.utilisateur.id"
     },
-    utilisateurEmail: {
+    email: {
         type: "field",
-        name: "utilisateurEmail",
+        name: "email",
         domain: DO_EMAIL,
         isRequired: true,
         label: "utilisateur.utilisateur.email"
     },
-    utilisateurTypeUtilisateurCode: {
+    typeUtilisateurCode: {
         type: "field",
-        name: "utilisateurTypeUtilisateurCode",
+        name: "typeUtilisateurCode",
         domain: DO_CODE,
         isRequired: true,
         label: "utilisateur.utilisateur.typeUtilisateurCode"

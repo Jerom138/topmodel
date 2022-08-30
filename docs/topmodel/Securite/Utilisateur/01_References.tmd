@@ -5,8 +5,7 @@
 ---
 module: Utilisateur
 tags:
-  - dto
-  - entity
+  - autoTag
 
 ---
 class:

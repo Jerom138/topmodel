@@ -5,8 +5,7 @@
 ---
 module: Securite
 tags:
-  - entity
-  - dto
+  - autoTag
 
 ---
 class:
