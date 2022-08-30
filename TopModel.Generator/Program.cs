@@ -177,7 +177,6 @@ if (config.Kasper != null)
     }
 }
 
-
 if (config.TopModel != null)
 {
     foreach (var topmodelConfig in config.TopModel)
@@ -187,7 +186,6 @@ if (config.TopModel != null)
         services.AddSingleton<IModelWatcher>(p =>
             new TopModelGenerator(p.GetRequiredService<ILogger<TopModelGenerator>>(), topmodelConfig));
     }
-
 }
 
 using var provider = services.BuildServiceProvider();

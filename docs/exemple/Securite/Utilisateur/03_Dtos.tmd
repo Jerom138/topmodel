@@ -19,6 +19,7 @@ class:
           - ProfilId
           - dateCreation
           - dateModification
+      
       required: true
       prefix: true
     - composition: UtilisateurDto

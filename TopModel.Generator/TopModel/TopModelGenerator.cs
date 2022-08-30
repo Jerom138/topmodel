@@ -14,7 +14,6 @@ public class TopModelGenerator : GeneratorBase
     private readonly ILogger<TopModelGenerator> _logger;
 
     private readonly IDictionary<string, ModelFile> _files = new Dictionary<string, ModelFile>();
-    public override string Name => "TopModelGenerator";
 
     public TopModelGenerator(ILogger<TopModelGenerator> logger, TopModelConfig config)
         : base(logger, config)
@@ -22,6 +21,11 @@ public class TopModelGenerator : GeneratorBase
         _config = config;
         _logger = logger;
     }
+
+    public override string Name => "TopModelGenerator";
+
+    public override IEnumerable<string> GeneratedFiles => _files.Where(f => f.Value.Classes.Any() || f.Value.Endpoints.Any()).Select(f => GetFilePath(f.Value));
+
     protected override void HandleFiles(IEnumerable<ModelFile> files)
     {
         foreach (var file in files.Where(f => f.Classes.Any() || f.Endpoints.Any()))
@@ -30,8 +34,6 @@ public class TopModelGenerator : GeneratorBase
             GenerateFile(file);
         }
     }
-
-    public override IEnumerable<string> GeneratedFiles => _files.Where(f => f.Value.Classes.Any() || f.Value.Endpoints.Any()).Select(f => GetFilePath(f.Value));
 
     private string GetFilePath(ModelFile file)
     {
@@ -127,13 +129,12 @@ public class TopModelGenerator : GeneratorBase
             });
         }
 
-
-
         fw.WriteLine($"  properties:");
         foreach (var p in classe.Properties)
         {
             WriteProperty(p, fw);
         }
+
         if (classe.ReferenceValues.Any())
         {
             fw.WriteLine();
@@ -141,15 +142,13 @@ public class TopModelGenerator : GeneratorBase
             foreach (var v in classe.ReferenceValues)
             {
                 fw.WriteLine(@$"    {v.Name}: {{ {string.Join(", ", v.Value.Select(val => $"{val.Key.Name}: {val.Value}"))} }}");
-
             }
         }
+
         WriteMappers(classe, fw);
     }
 
-
-
-    private void WriteProperty(IProperty property, FileWriter fw, Boolean isList = true, Boolean skipPrimaryKey = false)
+    private void WriteProperty(IProperty property, FileWriter fw, bool isList = true, bool skipPrimaryKey = false)
     {
         if (property is RegularProperty rp)
         {
@@ -183,6 +182,7 @@ public class TopModelGenerator : GeneratorBase
             {
                 throw new ModelException(cp, "La composition n'est pas accessible");
             }
+
             fw.WriteLine();
             fw.WriteLine($"    {(isList ? "- " : string.Empty)}composition: {cp.Composition.Name}");
             fw.WriteLine($"    {(isList ? "  " : string.Empty)}name: {cp.Name}");
@@ -200,10 +200,21 @@ public class TopModelGenerator : GeneratorBase
                 fw.WriteLine($"      prefix: {ap.Prefix}");
             }
 
+            if (ap.Label != ap.OriginalProperty.Label)
+            {
+                fw.WriteLine($"      label: {ap.Label}");
+            }
+
+            if (ap.Comment != ap.OriginalProperty.Comment)
+            {
+                fw.WriteLine($"      comment: {ap.Comment}");
+            }
+
             if (ap.Suffix != null)
             {
                 fw.WriteLine($"      suffix: {ap.Suffix}");
             }
+
             if (ap.Required != ap.Property.Required)
             {
                 fw.WriteLine($"      required: {(ap.Required ? "true" : "false")}");
@@ -291,6 +302,7 @@ public class TopModelGenerator : GeneratorBase
                 WriteProperty(param, fw);
             }
         }
+
         if (endpoint.Returns != null)
         {
             fw.WriteLine();
