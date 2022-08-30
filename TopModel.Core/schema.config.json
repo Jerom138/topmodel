@@ -345,6 +345,30 @@
           }
         }
       }
+    },
+    "topmodel": {
+      "type": "array",
+      "description": "Liste de configs pour la génération Topmodel",
+      "items": {
+        "type": "object",
+        "description": "Config pour la génération de Jpa.",
+        "additionalProperties": false,
+        "required": ["tags", "modelOutputDirectory", "daoPackageName"],
+        "properties": {
+          "tags": {
+            "type": "array",
+            "description": "Précise les tags de fichier que le générateur doit lire",
+            "items": {
+              "type": "string",
+              "description": "Catégorie de fichier que le générateur doit lire."
+            }
+          },
+          "modelOutputDirectory": {
+            "type": "string",
+            "description": "Dossier de sortie pour les fichiers topmodel."
+          }
+        }
+      }
     }
   }
 }

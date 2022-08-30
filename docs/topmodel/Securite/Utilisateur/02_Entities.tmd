@@ -1,33 +1,46 @@
+﻿#
+# ATTENTION CE FICHIER EST GENERE AUTOMATIQUEMENT !
+#
+
 ---
 module: Utilisateur
+tags:
+  - entity
 uses:
   - Securite/Profil/02_Entities
   - Securite/Utilisateur/01_References
-  - decorators
-tags:
-  - entity
+
 ---
 class:
   name: Utilisateur
-  label: Utilisateur
   comment: Utilisateur de l'application
   trigram: UTI
+  sqlName: UTILISATEUR
   decorators:
     - EntityListeners
   properties:
+
+    - name: dateCreation
+      comment: Date de création de l'utilisateur
+      domain: DO_DATE_CREATION
+
+    - name: dateModification
+      comment: Date de modification de l'utilisateur
+      domain: DO_DATE_MODIFICATION
+
     - name: Id
-      label: Id technique
-      required: true
-      primaryKey: true
-      domain: DO_ID
       comment: Id technique
+      domain: DO_ID
+      label: Id technique
+      primaryKey: true
+      required: true
+
     - association: Profil
       comment: Profil de l'utilisateur
-      type: manyToOne
+
     - name: Email
       comment: Email de l'utilisateur
       domain: DO_EMAIL
+
     - association: TypeUtilisateur
       comment: Type d'utilisateur en Many to one
-      type: manyToOne
-

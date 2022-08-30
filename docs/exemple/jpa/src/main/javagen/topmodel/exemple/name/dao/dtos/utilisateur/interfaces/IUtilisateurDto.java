@@ -21,11 +21,11 @@ public interface IUtilisateurDto {
 	long getUtilisateurId();
 
 	/**
-	 * Getter for utilisateuremail.
+	 * Getter for utilisateurEmail.
 	 *
-	 * @return value of {@link topmodel.exemple.name.dao.dtos.utilisateur.UtilisateurDto#utilisateuremail utilisateuremail}.
+	 * @return value of {@link topmodel.exemple.name.dao.dtos.utilisateur.UtilisateurDto#utilisateurEmail utilisateurEmail}.
 	 */
-	String getUtilisateuremail();
+	String getUtilisateurEmail();
 
 	/**
 	 * Getter for utilisateurTypeUtilisateurCode.

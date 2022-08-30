@@ -1,0 +1,35 @@
+﻿#
+# ATTENTION CE FICHIER EST GENERE AUTOMATIQUEMENT !
+#
+
+---
+module: Securite
+tags:
+  - entity
+uses:
+  - Securite/Profil/01_References
+
+---
+class:
+  name: Profil
+  comment: Profil des utilisateurs
+  trigram: PRO
+  sqlName: PROFIL
+  properties:
+
+    - name: Id
+      comment: Id technique
+      domain: DO_ID
+      label: Id technique du profil
+      primaryKey: true
+      required: true
+
+    - association: TypeProfil
+      comment: Type de profil
+
+  mappers:
+    to:
+      - class: Profil
+    from:
+      - params:
+        - class: Profil

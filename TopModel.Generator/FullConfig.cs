@@ -5,6 +5,7 @@ using TopModel.Generator.Jpa;
 using TopModel.Generator.Kasper;
 using TopModel.Generator.ProceduralSql;
 using TopModel.Generator.Ssdt;
+using TopModel.Generator.TopModel;
 
 namespace TopModel.Generator;
 
@@ -21,4 +22,6 @@ public class FullConfig : ModelConfig
     public IList<KasperConfig>? Kasper { get; set; }
 
     public IList<JpaConfig>? Jpa { get; set; }
+
+    public IList<TopModelConfig>? TopModel { get; set; }
 }

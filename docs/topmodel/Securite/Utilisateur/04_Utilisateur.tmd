@@ -1,0 +1,118 @@
+﻿#
+# ATTENTION CE FICHIER EST GENERE AUTOMATIQUEMENT !
+#
+
+---
+module: Securite.Utilisateur
+tags:
+  - dto
+uses:
+  - Securite/Utilisateur/02_Entities
+  - Securite/Utilisateur/03_Dtos
+
+---
+endpoint:
+  name: GetUtilisateur
+  method: GET
+  route: utilisateur/{utilisateurId}
+  description: Charge le détail d'un utilisateur
+  params:
+
+    - alias:
+        class: Utilisateur
+        property: Id
+
+  returns:
+
+    composition: UtilisateurDto
+    name: detail
+    comment: Le détail de l'utilisateur
+    kind: object
+
+---
+endpoint:
+  name: GetUtilisateurList
+  method: GET
+  route: utilisateur/list
+  description: Charge une liste d'utilisateurs par leur type
+  params:
+
+    - alias:
+        class: Utilisateur
+        property: TypeUtilisateurCode
+
+  returns:
+
+    composition: UtilisateurDto
+    name: utilisateurList
+    comment: Liste des utilisateurs
+    kind: list
+
+---
+endpoint:
+  name: SaveUtilisateur
+  method: POST
+  route: utilisateur/save
+  description: Sauvegarde un utilisateur
+  params:
+
+    - composition: UtilisateurDto
+      name: utilisateur
+      comment: Utilisateur à sauvegarder
+      kind: object
+
+  returns:
+
+    composition: UtilisateurDto
+    name: utilisateurList
+    comment: Utilisateur sauvegardé
+    kind: object
+
+---
+endpoint:
+  name: SaveAllUtilisateur
+  method: POST
+  route: utilisateur/saveAll
+  description: Sauvegarde une liste d'utilisateurs
+  params:
+
+    - composition: UtilisateurDto
+      name: utilisateur
+      comment: Utilisateur à sauvegarder
+      kind: list
+
+  returns:
+
+    composition: UtilisateurDto
+    name: utilisateurList
+    comment: Utilisateur sauvegardé
+    kind: list
+
+---
+endpoint:
+  name: Search
+  method: POST
+  route: utilisateur/search
+  description: Recherche des utilisateurs
+  params:
+
+    - alias:
+        class: UtilisateurDto
+        property: UtilisateurId
+
+    - alias:
+        class: UtilisateurDto
+        property: UtilisateurEmail
+      required: true
+
+    - alias:
+        class: UtilisateurDto
+        property: UtilisateurTypeUtilisateurCode
+      required: true
+
+  returns:
+
+    composition: UtilisateurDto
+    name: utilisateurList
+    comment: Utilisateurs matchant les critères
+    kind: DO_PAGE

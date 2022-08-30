@@ -33,13 +33,15 @@ public class UtilisateurDto implements Serializable, IUtilisateurDto {
 	 * Email de l'utilisateur.
 	 * Alias of {@link topmodel.exemple.name.dao.entities.utilisateur.Utilisateur#getEmail() Utilisateur#getEmail()} 
 	 */
+	@NotNull
 	@Email
-	private String utilisateuremail;
+	private String utilisateurEmail;
 
 	/**
 	 * Type d'utilisateur en Many to one.
 	 * Alias of {@link topmodel.exemple.name.dao.entities.utilisateur.Utilisateur#getTypeUtilisateurCode() Utilisateur#getTypeUtilisateurCode()} 
 	 */
+	@NotNull
 	private TypeUtilisateur.Values utilisateurTypeUtilisateurCode;
 
 	/**
@@ -63,7 +65,7 @@ public class UtilisateurDto implements Serializable, IUtilisateurDto {
 		}
 
 		this.utilisateurId = utilisateurDto.getUtilisateurId();
-		this.utilisateuremail = utilisateurDto.getUtilisateuremail();
+		this.utilisateurEmail = utilisateurDto.getUtilisateurEmail();
 		this.utilisateurTypeUtilisateurCode = utilisateurDto.getUtilisateurTypeUtilisateurCode();
 		this.utilisateurParent = utilisateurDto.getUtilisateurParent();
 	}
@@ -71,13 +73,13 @@ public class UtilisateurDto implements Serializable, IUtilisateurDto {
 	/**
 	 * All arg constructor.
 	 * @param utilisateurId Id technique
-	 * @param utilisateuremail Email de l'utilisateur
+	 * @param utilisateurEmail Email de l'utilisateur
 	 * @param utilisateurTypeUtilisateurCode Type d'utilisateur en Many to one
 	 * @param utilisateurParent UtilisateurParent
 	 */
-	public UtilisateurDto(long utilisateurId, String utilisateuremail, TypeUtilisateur.Values utilisateurTypeUtilisateurCode, UtilisateurDto utilisateurParent) {
+	public UtilisateurDto(long utilisateurId, String utilisateurEmail, TypeUtilisateur.Values utilisateurTypeUtilisateurCode, UtilisateurDto utilisateurParent) {
 		this.utilisateurId = utilisateurId;
-		this.utilisateuremail = utilisateuremail;
+		this.utilisateurEmail = utilisateurEmail;
 		this.utilisateurTypeUtilisateurCode = utilisateurTypeUtilisateurCode;
 		this.utilisateurParent = utilisateurParent;
 	}
@@ -99,7 +101,7 @@ public class UtilisateurDto implements Serializable, IUtilisateurDto {
 	protected void from(Utilisateur utilisateur) {
 		if(utilisateur != null) {
 			this.utilisateurId = utilisateur.getId();
-			this.utilisateuremail = utilisateur.getEmail();
+			this.utilisateurEmail = utilisateur.getEmail();
 
 			if(utilisateur.getTypeUtilisateur() != null) {
 				this.utilisateurTypeUtilisateurCode = utilisateur.getTypeUtilisateur().getCode();
@@ -120,13 +122,13 @@ public class UtilisateurDto implements Serializable, IUtilisateurDto {
 	}
 
 	/**
-	 * Getter for utilisateuremail.
+	 * Getter for utilisateurEmail.
 	 *
-	 * @return value of {@link topmodel.exemple.name.dao.dtos.utilisateur.UtilisateurDto#utilisateuremail utilisateuremail}.
+	 * @return value of {@link topmodel.exemple.name.dao.dtos.utilisateur.UtilisateurDto#utilisateurEmail utilisateurEmail}.
 	 */
 	@Override
-	public String getUtilisateuremail() {
-		return this.utilisateuremail;
+	public String getUtilisateurEmail() {
+		return this.utilisateurEmail;
 	}
 
 	/**
@@ -158,11 +160,11 @@ public class UtilisateurDto implements Serializable, IUtilisateurDto {
 	}
 
 	/**
-	 * Set the value of {@link topmodel.exemple.name.dao.dtos.utilisateur.UtilisateurDto#utilisateuremail utilisateuremail}.
-	 * @param utilisateuremail value to set
+	 * Set the value of {@link topmodel.exemple.name.dao.dtos.utilisateur.UtilisateurDto#utilisateurEmail utilisateurEmail}.
+	 * @param utilisateurEmail value to set
 	 */
-	public void setUtilisateuremail(String utilisateuremail) {
-		this.utilisateuremail = utilisateuremail;
+	public void setUtilisateurEmail(String utilisateurEmail) {
+		this.utilisateurEmail = utilisateurEmail;
 	}
 
 	/**
@@ -192,7 +194,7 @@ public class UtilisateurDto implements Serializable, IUtilisateurDto {
 		dest = dest == null ? new Utilisateur() : dest;
 
 		dest.setId(this.getUtilisateurId());
-		dest.setEmail(this.getUtilisateuremail());
+		dest.setEmail(this.getUtilisateurEmail());
 
 		return dest;
 	}

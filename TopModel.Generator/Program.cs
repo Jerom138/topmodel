@@ -13,6 +13,7 @@ using TopModel.Generator.Jpa;
 using TopModel.Generator.Kasper;
 using TopModel.Generator.ProceduralSql;
 using TopModel.Generator.Ssdt;
+using TopModel.Generator.TopModel;
 using static TopModel.Utils.ModelUtils;
 
 var fileChecker = new FileChecker("schema.config.json");
@@ -174,6 +175,19 @@ if (config.Kasper != null)
         services.AddSingleton<IModelWatcher>(p =>
             new KasperGenerator(p.GetRequiredService<ILogger<KasperGenerator>>(), kasperConfig));
     }
+}
+
+
+if (config.TopModel != null)
+{
+    foreach (var topmodelConfig in config.TopModel)
+    {
+        CombinePath(dn, topmodelConfig, c => c.ModelOutputDirectory);
+
+        services.AddSingleton<IModelWatcher>(p =>
+            new TopModelGenerator(p.GetRequiredService<ILogger<TopModelGenerator>>(), topmodelConfig));
+    }
+
 }
 
 using var provider = services.BuildServiceProvider();

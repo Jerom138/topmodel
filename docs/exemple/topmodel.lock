@@ -2,8 +2,15 @@
 # ATTENTION CE FICHIER EST GENERE AUTOMATIQUEMENT !
 #
 
-version: 1.9.11
+version: 1.9.12
 generatedFiles:
+  - ..\topmodel\Securite\Profil\01_References.tmd
+  - ..\topmodel\Securite\Profil\02_Entities.tmd
+  - ..\topmodel\Securite\Profil\03_Dtos.tmd
+  - ..\topmodel\Securite\Utilisateur\01_References.tmd
+  - ..\topmodel\Securite\Utilisateur\02_Entities.tmd
+  - ..\topmodel\Securite\Utilisateur\03_Dtos.tmd
+  - ..\topmodel\Securite\Utilisateur\04_Utilisateur.tmd
   - .\jpa\src\main\javagen\topmodel\exemple\name\api\controller\securite\IDtosController.java
   - .\jpa\src\main\javagen\topmodel\exemple\name\api\controller\securite\IEntitiesController.java
   - .\jpa\src\main\javagen\topmodel\exemple\name\api\controller\securite\IReferencesController.java

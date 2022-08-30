@@ -59,10 +59,10 @@ public interface IUtilisateurController {
 	/**
 	 * Recherche des utilisateurs.
 	 * @param utiUtilisateurId Id technique
-	 * @param utilisateuremail Email de l'utilisateur
+	 * @param utilisateurEmail Email de l'utilisateur
 	 * @param utilisateurTypeUtilisateurCode Type d'utilisateur en Many to one
 	 * @return Utilisateurs matchant les critères
 	 */
 	@PostMapping(path = "utilisateur/search")
-	Page<UtilisateurDto> search(@RequestParam(value = "utiUtilisateurId", required = true) long utiUtilisateurId, @RequestParam(value = "utilisateuremail", required = false) String utilisateuremail, @RequestParam(value = "utilisateurTypeUtilisateurCode", required = false) TypeUtilisateur.Values utilisateurTypeUtilisateurCode);
+	Page<UtilisateurDto> search(@RequestParam(value = "utiUtilisateurId", required = true) long utiUtilisateurId, @RequestParam(value = "utilisateurEmail", required = true) String utilisateurEmail, @RequestParam(value = "utilisateurTypeUtilisateurCode", required = true) TypeUtilisateur.Values utilisateurTypeUtilisateurCode);
 }

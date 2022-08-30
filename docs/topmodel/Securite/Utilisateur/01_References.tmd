@@ -1,0 +1,34 @@
+﻿#
+# ATTENTION CE FICHIER EST GENERE AUTOMATIQUEMENT !
+#
+
+---
+module: Utilisateur
+tags:
+  - dto
+  - entity
+
+---
+class:
+  name: TypeUtilisateur
+  comment: Type d'utilisateur
+  reference: true
+  trigram: TUT
+  sqlName: TYPE_UTILISATEUR
+  properties:
+
+    - name: Code
+      comment: Code du type d'utilisateur
+      domain: DO_CODE
+      primaryKey: true
+      required: true
+
+    - name: Libelle
+      comment: Libellé du type d'utilisateur
+      domain: DO_LIBELLE
+      required: true
+
+  values:
+    value1: { Code: ADM, Libelle: Administrateur }
+    value2: { Code: GES, Libelle: Gestionnaire }
+    value3: { Code: CLI, Libelle: Client }

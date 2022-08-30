@@ -9,7 +9,7 @@ export const utilisateur = {
     },
     utilisateur: {
         id: "Id technique",
-        email: "email",
+        email: "Email",
         typeUtilisateurCode: "TypeUtilisateurCode"
     }
 };

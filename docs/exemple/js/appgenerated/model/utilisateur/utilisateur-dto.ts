@@ -8,7 +8,7 @@ import {TypeUtilisateurCode} from "./references";
 
 export interface UtilisateurDto {
     utilisateurId?: number,
-    utilisateuremail?: string,
+    utilisateurEmail?: string,
     utilisateurTypeUtilisateurCode?: TypeUtilisateurCode,
     utilisateurParent?: UtilisateurDto
 }
@@ -21,18 +21,18 @@ export const UtilisateurDtoEntity = {
         isRequired: true,
         label: "utilisateur.utilisateur.id"
     },
-    utilisateuremail: {
+    utilisateurEmail: {
         type: "field",
-        name: "utilisateuremail",
+        name: "utilisateurEmail",
         domain: DO_EMAIL,
-        isRequired: false,
+        isRequired: true,
         label: "utilisateur.utilisateur.email"
     },
     utilisateurTypeUtilisateurCode: {
         type: "field",
         name: "utilisateurTypeUtilisateurCode",
         domain: DO_CODE,
-        isRequired: false,
+        isRequired: true,
         label: "utilisateur.utilisateur.typeUtilisateurCode"
     },
     utilisateurParent: {

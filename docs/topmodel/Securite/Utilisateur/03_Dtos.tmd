@@ -1,0 +1,49 @@
+﻿#
+# ATTENTION CE FICHIER EST GENERE AUTOMATIQUEMENT !
+#
+
+---
+module: Utilisateur
+tags:
+  - dto
+uses:
+  - Securite/Utilisateur/02_Entities
+
+---
+class:
+  name: UtilisateurDto
+  comment: Objet non persisté de communication avec le serveur
+  label: Utilisateur
+  sqlName: UTILISATEUR_DTO
+  decorators:
+    - Interface
+  properties:
+
+    - alias:
+        class: Utilisateur
+        property: Id
+      prefix: Utilisateur
+
+    - alias:
+        class: Utilisateur
+        property: Email
+      prefix: Utilisateur
+      required: true
+
+    - alias:
+        class: Utilisateur
+        property: TypeUtilisateurCode
+      prefix: Utilisateur
+      required: true
+
+    - composition: UtilisateurDto
+      name: UtilisateurParent
+      comment: UtilisateurParent
+      kind: object
+
+  mappers:
+    to:
+      - class: Utilisateur
+    from:
+      - params:
+        - class: Utilisateur

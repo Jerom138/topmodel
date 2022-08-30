@@ -1,0 +1,32 @@
+﻿#
+# ATTENTION CE FICHIER EST GENERE AUTOMATIQUEMENT !
+#
+
+---
+module: Securite
+tags:
+  - entity
+  - dto
+
+---
+class:
+  name: TypeProfil
+  comment: Type d'utilisateur
+  reference: true
+  sqlName: TYPE_PROFIL
+  properties:
+
+    - name: Code
+      comment: Code du type d'utilisateur
+      domain: DO_CODE
+      primaryKey: true
+      required: true
+
+    - name: Libelle
+      comment: Libellé du type d'utilisateur
+      domain: DO_LIBELLE
+      required: true
+
+  values:
+    value1: { Code: ADM, Libelle: Administrateur }
+    value2: { Code: GES, Libelle: Gestionnaire }

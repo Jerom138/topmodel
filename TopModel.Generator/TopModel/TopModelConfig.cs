@@ -1,0 +1,11 @@
+#nullable disable
+
+namespace TopModel.Generator.TopModel;
+
+public class TopModelConfig : GeneratorConfigBase
+{
+    /// <summary>
+    /// Dossier de sortie pour le modèle.
+    /// </summary>
+    public string ModelOutputDirectory { get; set; }
+}

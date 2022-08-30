@@ -1,0 +1,38 @@
+﻿#
+# ATTENTION CE FICHIER EST GENERE AUTOMATIQUEMENT !
+#
+
+---
+module: Securite
+tags:
+  - dto
+uses:
+  - Securite/Profil/02_Entities
+  - Securite/Utilisateur/03_Dtos
+
+---
+class:
+  name: ProfilDto
+  comment: Objet métier non persisté représentant Profil
+  sqlName: PROFIL_DTO
+  properties:
+
+    - alias:
+        class: Profil
+        property: Id
+
+    - alias:
+        class: Profil
+        property: TypeProfilCode
+
+    - composition: UtilisateurDto
+      name: utilisateurs
+      comment: Liste paginée des utilisateurs de ce profil
+      kind: list
+
+  mappers:
+    to:
+      - class: Profil
+    from:
+      - params:
+        - class: Profil
