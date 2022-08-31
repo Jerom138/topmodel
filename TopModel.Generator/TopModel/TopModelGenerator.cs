@@ -121,17 +121,13 @@ public class TopModelGenerator : GeneratorBase
             fw.WriteLine($"  sqlName: {classe.SqlName}");
         }
 
-        if (classe.Decorators.Any())
+        if (classe.Decorators.Any(d => _config.Decorators.Any(deco => d.Name == deco.From)))
         {
             fw.WriteLine($"  decorators:");
-            classe.Decorators.ForEach(d =>
+            classe.Decorators.Where((d => _config.Decorators.Any(deco => d.Name == deco.From))).ToList().ForEach(d =>
             {
                 var deco = d.Name.ToString();
-                if (_config.Decorators.Any(d => d.From == deco))
-                {
-                    deco = _config.Decorators.Find(d => d.From == deco)!.To;
-                }
-
+                deco = _config.Decorators.Find(d => d.From == deco)!.To;
                 fw.WriteLine($"    - {deco}");
             });
         }
