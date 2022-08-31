@@ -2,7 +2,7 @@
 //// ATTENTION CE FICHIER EST GENERE AUTOMATIQUEMENT !
 ////
 
-package topmodel.exemple.name.dao.dtos.securite;
+package topmodel.exemple.name.dao.dtos.securite.profil;
 
 import java.io.Serializable;
 import java.util.List;
@@ -10,9 +10,9 @@ import java.util.stream.Collectors;
 
 import javax.annotation.Generated;
 
-import topmodel.exemple.name.dao.dtos.utilisateur.UtilisateurDto;
-import topmodel.exemple.name.dao.entities.securite.Profil;
-import topmodel.exemple.name.dao.entities.securite.TypeProfil;
+import topmodel.exemple.name.dao.dtos.securite.utilisateur.UtilisateurDto;
+import topmodel.exemple.name.dao.entities.securite.profil.Profil;
+import topmodel.exemple.name.dao.entities.securite.profil.TypeProfil;
 
 /**
  * Objet métier non persisté représentant Profil.
@@ -24,13 +24,13 @@ public class ProfilDto implements Serializable {
 
 	/**
 	 * Id technique.
-	 * Alias of {@link topmodel.exemple.name.dao.entities.securite.Profil#getId() Profil#getId()} 
+	 * Alias of {@link topmodel.exemple.name.dao.entities.securite.profil.Profil#getId() Profil#getId()} 
 	 */
 	private long id;
 
 	/**
 	 * Type de profil.
-	 * Alias of {@link topmodel.exemple.name.dao.entities.securite.Profil#getTypeProfilCode() Profil#getTypeProfilCode()} 
+	 * Alias of {@link topmodel.exemple.name.dao.entities.securite.profil.Profil#getTypeProfilCode() Profil#getTypeProfilCode()} 
 	 */
 	private TypeProfil.Values typeProfilCode;
 
@@ -101,7 +101,7 @@ public class ProfilDto implements Serializable {
 	/**
 	 * Getter for id.
 	 *
-	 * @return value of {@link topmodel.exemple.name.dao.dtos.securite.ProfilDto#id id}.
+	 * @return value of {@link topmodel.exemple.name.dao.dtos.securite.profil.ProfilDto#id id}.
 	 */
 	public long getId() {
 		return this.id;
@@ -110,7 +110,7 @@ public class ProfilDto implements Serializable {
 	/**
 	 * Getter for typeProfilCode.
 	 *
-	 * @return value of {@link topmodel.exemple.name.dao.dtos.securite.ProfilDto#typeProfilCode typeProfilCode}.
+	 * @return value of {@link topmodel.exemple.name.dao.dtos.securite.profil.ProfilDto#typeProfilCode typeProfilCode}.
 	 */
 	public TypeProfil.Values getTypeProfilCode() {
 		return this.typeProfilCode;
@@ -119,14 +119,14 @@ public class ProfilDto implements Serializable {
 	/**
 	 * Getter for utilisateurs.
 	 *
-	 * @return value of {@link topmodel.exemple.name.dao.dtos.securite.ProfilDto#utilisateurs utilisateurs}.
+	 * @return value of {@link topmodel.exemple.name.dao.dtos.securite.profil.ProfilDto#utilisateurs utilisateurs}.
 	 */
 	public List<UtilisateurDto> getUtilisateurs() {
 		return this.utilisateurs;
 	}
 
 	/**
-	 * Set the value of {@link topmodel.exemple.name.dao.dtos.securite.ProfilDto#id id}.
+	 * Set the value of {@link topmodel.exemple.name.dao.dtos.securite.profil.ProfilDto#id id}.
 	 * @param id value to set
 	 */
 	public void setId(long id) {
@@ -134,7 +134,7 @@ public class ProfilDto implements Serializable {
 	}
 
 	/**
-	 * Set the value of {@link topmodel.exemple.name.dao.dtos.securite.ProfilDto#typeProfilCode typeProfilCode}.
+	 * Set the value of {@link topmodel.exemple.name.dao.dtos.securite.profil.ProfilDto#typeProfilCode typeProfilCode}.
 	 * @param typeProfilCode value to set
 	 */
 	public void setTypeProfilCode(TypeProfil.Values typeProfilCode) {
@@ -142,7 +142,7 @@ public class ProfilDto implements Serializable {
 	}
 
 	/**
-	 * Set the value of {@link topmodel.exemple.name.dao.dtos.securite.ProfilDto#utilisateurs utilisateurs}.
+	 * Set the value of {@link topmodel.exemple.name.dao.dtos.securite.profil.ProfilDto#utilisateurs utilisateurs}.
 	 * @param utilisateurs value to set
 	 */
 	public void setUtilisateurs(List<UtilisateurDto> utilisateurs) {

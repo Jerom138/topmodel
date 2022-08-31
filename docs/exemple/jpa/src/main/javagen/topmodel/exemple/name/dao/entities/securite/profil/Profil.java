@@ -2,9 +2,14 @@
 //// ATTENTION CE FICHIER EST GENERE AUTOMATIQUEMENT !
 ////
 
-package topmodel.exemple.name.dao.entities.securite;
+package topmodel.exemple.name.dao.entities.securite.profil;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.Generated;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,10 +18,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import topmodel.exemple.name.dao.entities.securite.TypeProfil;
+import topmodel.exemple.name.dao.entities.securite.profil.TypeProfil;
+import topmodel.exemple.name.dao.entities.securite.utilisateur.Utilisateur;
 import topmodel.exemple.utils.IFieldEnum;
 
 /**
@@ -44,6 +51,12 @@ public class Profil {
 	private TypeProfil typeProfil;
 
 	/**
+	 * Association réciproque de {@link topmodel.exemple.name.dao.entities.securite.utilisateur.Utilisateur#profil Utilisateur.profil}.
+	 */
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY, mappedBy = "profil")
+	private List<Utilisateur> utilisateurs;
+
+	/**
 	 * No arg constructor.
 	 */
 	public Profil() {
@@ -60,16 +73,20 @@ public class Profil {
 
 		this.id = profil.getId();
 		this.typeProfil = profil.getTypeProfil();
+
+		this.utilisateurs = profil.getUtilisateurs().stream().collect(Collectors.toList());
 	}
 
 	/**
 	 * All arg constructor.
 	 * @param id Id technique
 	 * @param typeProfil Type de profil
+	 * @param utilisateurs Association réciproque de {@link topmodel.exemple.name.dao.entities.securite.utilisateur.Utilisateur#profil Utilisateur.profil}
 	 */
-	public Profil(long id, TypeProfil typeProfil) {
+	public Profil(long id, TypeProfil typeProfil, List<Utilisateur> utilisateurs) {
 		this.id = id;
 		this.typeProfil = typeProfil;
+		this.utilisateurs = utilisateurs;
 	}
 
 	/**
@@ -97,7 +114,7 @@ public class Profil {
 	/**
 	 * Getter for id.
 	 *
-	 * @return value of {@link topmodel.exemple.name.dao.entities.securite.Profil#id id}.
+	 * @return value of {@link topmodel.exemple.name.dao.entities.securite.profil.Profil#id id}.
 	 */
 	public long getId() {
 		return this.id;
@@ -106,14 +123,25 @@ public class Profil {
 	/**
 	 * Getter for typeProfil.
 	 *
-	 * @return value of {@link topmodel.exemple.name.dao.entities.securite.Profil#typeProfil typeProfil}.
+	 * @return value of {@link topmodel.exemple.name.dao.entities.securite.profil.Profil#typeProfil typeProfil}.
 	 */
 	protected TypeProfil getTypeProfil() {
 		return this.typeProfil;
 	}
 
 	/**
-	 * Set the value of {@link topmodel.exemple.name.dao.entities.securite.Profil#id id}.
+	 * Getter for utilisateurs.
+	 *
+	 * @return value of {@link topmodel.exemple.name.dao.entities.securite.profil.Profil#utilisateurs utilisateurs}.
+	 */
+	public List<Utilisateur> getUtilisateurs() {
+		if(this.utilisateurs == null)
+			this.utilisateurs = new ArrayList<>();
+		return this.utilisateurs;
+	}
+
+	/**
+	 * Set the value of {@link topmodel.exemple.name.dao.entities.securite.profil.Profil#id id}.
 	 * @param id value to set
 	 */
 	public void setId(long id) {
@@ -121,11 +149,19 @@ public class Profil {
 	}
 
 	/**
-	 * Set the value of {@link topmodel.exemple.name.dao.entities.securite.Profil#typeProfil typeProfil}.
+	 * Set the value of {@link topmodel.exemple.name.dao.entities.securite.profil.Profil#typeProfil typeProfil}.
 	 * @param typeProfil value to set
 	 */
 	public void setTypeProfil(TypeProfil typeProfil) {
 		this.typeProfil = typeProfil;
+	}
+
+	/**
+	 * Set the value of {@link topmodel.exemple.name.dao.entities.securite.profil.Profil#utilisateurs utilisateurs}.
+	 * @param utilisateurs value to set
+	 */
+	public void setUtilisateurs(List<Utilisateur> utilisateurs) {
+		this.utilisateurs = utilisateurs;
 	}
 
 	/**
@@ -161,10 +197,11 @@ public class Profil {
 	}
 
 	/**
-	 * Enumération des champs de la classe {@link topmodel.exemple.name.dao.entities.securite.Profil Profil}.
+	 * Enumération des champs de la classe {@link topmodel.exemple.name.dao.entities.securite.profil.Profil Profil}.
 	 */
 	public enum Fields implements IFieldEnum<Profil> {
         ID, //
-        TYPE_PROFIL
+        TYPE_PROFIL, //
+        UTILISATEURS
 	}
 }

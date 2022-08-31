@@ -2,7 +2,7 @@
 //// ATTENTION CE FICHIER EST GENERE AUTOMATIQUEMENT !
 ////
 
-package topmodel.exemple.name.dao.entities.utilisateur;
+package topmodel.exemple.name.dao.entities.securite.utilisateur;
 
 import javax.annotation.Generated;
 import javax.persistence.Column;
@@ -16,7 +16,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Immutable;
 
-import topmodel.exemple.name.dao.entities.utilisateur.TypeUtilisateur;
+import topmodel.exemple.name.dao.entities.securite.utilisateur.TypeUtilisateur;
 import topmodel.exemple.utils.IFieldEnum;
 
 /**
@@ -75,7 +75,7 @@ public class TypeUtilisateur {
 	/**
 	 * Getter for code.
 	 *
-	 * @return value of {@link topmodel.exemple.name.dao.entities.utilisateur.TypeUtilisateur#code code}.
+	 * @return value of {@link topmodel.exemple.name.dao.entities.securite.utilisateur.TypeUtilisateur#code code}.
 	 */
 	public TypeUtilisateur.Values getCode() {
 		return this.code;
@@ -84,14 +84,14 @@ public class TypeUtilisateur {
 	/**
 	 * Getter for libelle.
 	 *
-	 * @return value of {@link topmodel.exemple.name.dao.entities.utilisateur.TypeUtilisateur#libelle libelle}.
+	 * @return value of {@link topmodel.exemple.name.dao.entities.securite.utilisateur.TypeUtilisateur#libelle libelle}.
 	 */
 	public String getLibelle() {
 		return this.libelle;
 	}
 
 	/**
-	 * Set the value of {@link topmodel.exemple.name.dao.entities.utilisateur.TypeUtilisateur#code code}.
+	 * Set the value of {@link topmodel.exemple.name.dao.entities.securite.utilisateur.TypeUtilisateur#code code}.
 	 * @param code value to set
 	 */
 	public void setCode(TypeUtilisateur.Values code) {
@@ -99,7 +99,7 @@ public class TypeUtilisateur {
 	}
 
 	/**
-	 * Set the value of {@link topmodel.exemple.name.dao.entities.utilisateur.TypeUtilisateur#libelle libelle}.
+	 * Set the value of {@link topmodel.exemple.name.dao.entities.securite.utilisateur.TypeUtilisateur#libelle libelle}.
 	 * @param libelle value to set
 	 */
 	public void setLibelle(String libelle) {
@@ -123,7 +123,7 @@ public class TypeUtilisateur {
 	}
 
 	/**
-	 * Enumération des champs de la classe {@link topmodel.exemple.name.dao.entities.utilisateur.TypeUtilisateur TypeUtilisateur}.
+	 * Enumération des champs de la classe {@link topmodel.exemple.name.dao.entities.securite.utilisateur.TypeUtilisateur TypeUtilisateur}.
 	 */
 	public enum Fields implements IFieldEnum<TypeUtilisateur> {
         CODE, //

@@ -5,8 +5,8 @@
 import {fetch} from "@api-services";
 
 import {Page} from "@/types";
-import {TypeUtilisateurCode} from "../../../model/utilisateur/references";
-import {UtilisateurDto} from "../../../model/utilisateur/utilisateur-dto";
+import {TypeUtilisateurCode} from "../../../model/securite/utilisateur/references";
+import {UtilisateurDto} from "../../../model/securite/utilisateur/utilisateur-dto";
 
 /**
  * Charge le détail d'un utilisateur

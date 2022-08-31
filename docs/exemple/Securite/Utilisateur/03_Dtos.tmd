@@ -1,5 +1,5 @@
 ---
-module: Utilisateur
+module: Securite.Utilisateur
 uses:
   - Securite/Utilisateur/02_Entities
   - decorators

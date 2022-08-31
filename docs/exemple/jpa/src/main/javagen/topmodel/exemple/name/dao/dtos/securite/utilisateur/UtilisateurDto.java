@@ -2,7 +2,7 @@
 //// ATTENTION CE FICHIER EST GENERE AUTOMATIQUEMENT !
 ////
 
-package topmodel.exemple.name.dao.dtos.utilisateur;
+package topmodel.exemple.name.dao.dtos.securite.utilisateur;
 
 import java.io.Serializable;
 
@@ -10,9 +10,9 @@ import javax.annotation.Generated;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
-import topmodel.exemple.name.dao.dtos.utilisateur.interfaces.IUtilisateurDto;
-import topmodel.exemple.name.dao.entities.utilisateur.TypeUtilisateur;
-import topmodel.exemple.name.dao.entities.utilisateur.Utilisateur;
+import topmodel.exemple.name.dao.dtos.securite.utilisateur.interfaces.IUtilisateurDto;
+import topmodel.exemple.name.dao.entities.securite.utilisateur.TypeUtilisateur;
+import topmodel.exemple.name.dao.entities.securite.utilisateur.Utilisateur;
 
 /**
  * Objet non persisté de communication avec le serveur.
@@ -24,13 +24,13 @@ public class UtilisateurDto implements Serializable, IUtilisateurDto {
 
 	/**
 	 * Id technique.
-	 * Alias of {@link topmodel.exemple.name.dao.entities.utilisateur.Utilisateur#getId() Utilisateur#getId()} 
+	 * Alias of {@link topmodel.exemple.name.dao.entities.securite.utilisateur.Utilisateur#getId() Utilisateur#getId()} 
 	 */
 	private long id;
 
 	/**
 	 * Email de l'utilisateur.
-	 * Alias of {@link topmodel.exemple.name.dao.entities.utilisateur.Utilisateur#getEmail() Utilisateur#getEmail()} 
+	 * Alias of {@link topmodel.exemple.name.dao.entities.securite.utilisateur.Utilisateur#getEmail() Utilisateur#getEmail()} 
 	 */
 	@NotNull
 	@Email
@@ -38,7 +38,7 @@ public class UtilisateurDto implements Serializable, IUtilisateurDto {
 
 	/**
 	 * Type d'utilisateur en Many to one.
-	 * Alias of {@link topmodel.exemple.name.dao.entities.utilisateur.Utilisateur#getTypeUtilisateurCode() Utilisateur#getTypeUtilisateurCode()} 
+	 * Alias of {@link topmodel.exemple.name.dao.entities.securite.utilisateur.Utilisateur#getTypeUtilisateurCode() Utilisateur#getTypeUtilisateurCode()} 
 	 */
 	@NotNull
 	private TypeUtilisateur.Values typeUtilisateurCode;
@@ -113,7 +113,7 @@ public class UtilisateurDto implements Serializable, IUtilisateurDto {
 	/**
 	 * Getter for id.
 	 *
-	 * @return value of {@link topmodel.exemple.name.dao.dtos.utilisateur.UtilisateurDto#id id}.
+	 * @return value of {@link topmodel.exemple.name.dao.dtos.securite.utilisateur.UtilisateurDto#id id}.
 	 */
 	@Override
 	public long getId() {
@@ -123,7 +123,7 @@ public class UtilisateurDto implements Serializable, IUtilisateurDto {
 	/**
 	 * Getter for email.
 	 *
-	 * @return value of {@link topmodel.exemple.name.dao.dtos.utilisateur.UtilisateurDto#email email}.
+	 * @return value of {@link topmodel.exemple.name.dao.dtos.securite.utilisateur.UtilisateurDto#email email}.
 	 */
 	@Override
 	public String getEmail() {
@@ -133,7 +133,7 @@ public class UtilisateurDto implements Serializable, IUtilisateurDto {
 	/**
 	 * Getter for typeUtilisateurCode.
 	 *
-	 * @return value of {@link topmodel.exemple.name.dao.dtos.utilisateur.UtilisateurDto#typeUtilisateurCode typeUtilisateurCode}.
+	 * @return value of {@link topmodel.exemple.name.dao.dtos.securite.utilisateur.UtilisateurDto#typeUtilisateurCode typeUtilisateurCode}.
 	 */
 	@Override
 	public TypeUtilisateur.Values getTypeUtilisateurCode() {
@@ -143,7 +143,7 @@ public class UtilisateurDto implements Serializable, IUtilisateurDto {
 	/**
 	 * Getter for utilisateurParent.
 	 *
-	 * @return value of {@link topmodel.exemple.name.dao.dtos.utilisateur.UtilisateurDto#utilisateurParent utilisateurParent}.
+	 * @return value of {@link topmodel.exemple.name.dao.dtos.securite.utilisateur.UtilisateurDto#utilisateurParent utilisateurParent}.
 	 */
 	@Override
 	public UtilisateurDto getUtilisateurParent() {
@@ -151,7 +151,7 @@ public class UtilisateurDto implements Serializable, IUtilisateurDto {
 	}
 
 	/**
-	 * Set the value of {@link topmodel.exemple.name.dao.dtos.utilisateur.UtilisateurDto#id id}.
+	 * Set the value of {@link topmodel.exemple.name.dao.dtos.securite.utilisateur.UtilisateurDto#id id}.
 	 * @param id value to set
 	 */
 	public void setId(long id) {
@@ -159,7 +159,7 @@ public class UtilisateurDto implements Serializable, IUtilisateurDto {
 	}
 
 	/**
-	 * Set the value of {@link topmodel.exemple.name.dao.dtos.utilisateur.UtilisateurDto#email email}.
+	 * Set the value of {@link topmodel.exemple.name.dao.dtos.securite.utilisateur.UtilisateurDto#email email}.
 	 * @param email value to set
 	 */
 	public void setEmail(String email) {
@@ -167,7 +167,7 @@ public class UtilisateurDto implements Serializable, IUtilisateurDto {
 	}
 
 	/**
-	 * Set the value of {@link topmodel.exemple.name.dao.dtos.utilisateur.UtilisateurDto#typeUtilisateurCode typeUtilisateurCode}.
+	 * Set the value of {@link topmodel.exemple.name.dao.dtos.securite.utilisateur.UtilisateurDto#typeUtilisateurCode typeUtilisateurCode}.
 	 * @param typeUtilisateurCode value to set
 	 */
 	public void setTypeUtilisateurCode(TypeUtilisateur.Values typeUtilisateurCode) {
@@ -175,7 +175,7 @@ public class UtilisateurDto implements Serializable, IUtilisateurDto {
 	}
 
 	/**
-	 * Set the value of {@link topmodel.exemple.name.dao.dtos.utilisateur.UtilisateurDto#utilisateurParent utilisateurParent}.
+	 * Set the value of {@link topmodel.exemple.name.dao.dtos.securite.utilisateur.UtilisateurDto#utilisateurParent utilisateurParent}.
 	 * @param utilisateurParent value to set
 	 */
 	public void setUtilisateurParent(UtilisateurDto utilisateurParent) {

@@ -2,7 +2,7 @@
 //// ATTENTION CE FICHIER EST GENERE AUTOMATIQUEMENT !
 ////
 
-package topmodel.exemple.name.dao.entities.utilisateur;
+package topmodel.exemple.name.dao.entities.securite.utilisateur;
 
 import java.time.LocalDate;
 import java.util.DateTime;
@@ -27,8 +27,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import oorg.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import topmodel.exemple.name.dao.entities.securite.Profil;
-import topmodel.exemple.name.dao.entities.utilisateur.TypeUtilisateur;
+import topmodel.exemple.name.dao.entities.securite.profil.Profil;
+import topmodel.exemple.name.dao.entities.securite.utilisateur.TypeUtilisateur;
 import topmodel.exemple.utils.IFieldEnum;
 
 /**
@@ -128,7 +128,7 @@ public class Utilisateur {
 	/**
 	 * Getter for dateCreation.
 	 *
-	 * @return value of {@link topmodel.exemple.name.dao.entities.utilisateur.Utilisateur#dateCreation dateCreation}.
+	 * @return value of {@link topmodel.exemple.name.dao.entities.securite.utilisateur.Utilisateur#dateCreation dateCreation}.
 	 */
 	public DateTime getDateCreation() {
 		return this.dateCreation;
@@ -137,7 +137,7 @@ public class Utilisateur {
 	/**
 	 * Getter for dateModification.
 	 *
-	 * @return value of {@link topmodel.exemple.name.dao.entities.utilisateur.Utilisateur#dateModification dateModification}.
+	 * @return value of {@link topmodel.exemple.name.dao.entities.securite.utilisateur.Utilisateur#dateModification dateModification}.
 	 */
 	public DateTime getDateModification() {
 		return this.dateModification;
@@ -146,7 +146,7 @@ public class Utilisateur {
 	/**
 	 * Getter for id.
 	 *
-	 * @return value of {@link topmodel.exemple.name.dao.entities.utilisateur.Utilisateur#id id}.
+	 * @return value of {@link topmodel.exemple.name.dao.entities.securite.utilisateur.Utilisateur#id id}.
 	 */
 	public long getId() {
 		return this.id;
@@ -155,7 +155,7 @@ public class Utilisateur {
 	/**
 	 * Getter for profil.
 	 *
-	 * @return value of {@link topmodel.exemple.name.dao.entities.utilisateur.Utilisateur#profil profil}.
+	 * @return value of {@link topmodel.exemple.name.dao.entities.securite.utilisateur.Utilisateur#profil profil}.
 	 */
 	public Profil getProfil() {
 		return this.profil;
@@ -164,7 +164,7 @@ public class Utilisateur {
 	/**
 	 * Getter for email.
 	 *
-	 * @return value of {@link topmodel.exemple.name.dao.entities.utilisateur.Utilisateur#email email}.
+	 * @return value of {@link topmodel.exemple.name.dao.entities.securite.utilisateur.Utilisateur#email email}.
 	 */
 	public String getEmail() {
 		return this.email;
@@ -173,14 +173,14 @@ public class Utilisateur {
 	/**
 	 * Getter for typeUtilisateur.
 	 *
-	 * @return value of {@link topmodel.exemple.name.dao.entities.utilisateur.Utilisateur#typeUtilisateur typeUtilisateur}.
+	 * @return value of {@link topmodel.exemple.name.dao.entities.securite.utilisateur.Utilisateur#typeUtilisateur typeUtilisateur}.
 	 */
 	protected TypeUtilisateur getTypeUtilisateur() {
 		return this.typeUtilisateur;
 	}
 
 	/**
-	 * Set the value of {@link topmodel.exemple.name.dao.entities.utilisateur.Utilisateur#dateCreation dateCreation}.
+	 * Set the value of {@link topmodel.exemple.name.dao.entities.securite.utilisateur.Utilisateur#dateCreation dateCreation}.
 	 * @param dateCreation value to set
 	 */
 	public void setDateCreation(DateTime dateCreation) {
@@ -188,7 +188,7 @@ public class Utilisateur {
 	}
 
 	/**
-	 * Set the value of {@link topmodel.exemple.name.dao.entities.utilisateur.Utilisateur#dateModification dateModification}.
+	 * Set the value of {@link topmodel.exemple.name.dao.entities.securite.utilisateur.Utilisateur#dateModification dateModification}.
 	 * @param dateModification value to set
 	 */
 	public void setDateModification(DateTime dateModification) {
@@ -196,7 +196,7 @@ public class Utilisateur {
 	}
 
 	/**
-	 * Set the value of {@link topmodel.exemple.name.dao.entities.utilisateur.Utilisateur#id id}.
+	 * Set the value of {@link topmodel.exemple.name.dao.entities.securite.utilisateur.Utilisateur#id id}.
 	 * @param id value to set
 	 */
 	public void setId(long id) {
@@ -204,7 +204,7 @@ public class Utilisateur {
 	}
 
 	/**
-	 * Set the value of {@link topmodel.exemple.name.dao.entities.utilisateur.Utilisateur#profil profil}.
+	 * Set the value of {@link topmodel.exemple.name.dao.entities.securite.utilisateur.Utilisateur#profil profil}.
 	 * @param profil value to set
 	 */
 	public void setProfil(Profil profil) {
@@ -212,7 +212,7 @@ public class Utilisateur {
 	}
 
 	/**
-	 * Set the value of {@link topmodel.exemple.name.dao.entities.utilisateur.Utilisateur#email email}.
+	 * Set the value of {@link topmodel.exemple.name.dao.entities.securite.utilisateur.Utilisateur#email email}.
 	 * @param email value to set
 	 */
 	public void setEmail(String email) {
@@ -220,7 +220,7 @@ public class Utilisateur {
 	}
 
 	/**
-	 * Set the value of {@link topmodel.exemple.name.dao.entities.utilisateur.Utilisateur#typeUtilisateur typeUtilisateur}.
+	 * Set the value of {@link topmodel.exemple.name.dao.entities.securite.utilisateur.Utilisateur#typeUtilisateur typeUtilisateur}.
 	 * @param typeUtilisateur value to set
 	 */
 	public void setTypeUtilisateur(TypeUtilisateur typeUtilisateur) {
@@ -244,7 +244,7 @@ public class Utilisateur {
 	}
 
 	/**
-	 * Enumération des champs de la classe {@link topmodel.exemple.name.dao.entities.utilisateur.Utilisateur Utilisateur}.
+	 * Enumération des champs de la classe {@link topmodel.exemple.name.dao.entities.securite.utilisateur.Utilisateur Utilisateur}.
 	 */
 	public enum Fields implements IFieldEnum<Utilisateur> {
         DATE_CREATION, //

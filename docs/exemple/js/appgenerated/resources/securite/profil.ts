@@ -2,7 +2,7 @@
 //// ATTENTION CE FICHIER EST GENERE AUTOMATIQUEMENT !
 ////
 
-export const securite = {
+export const profil = {
     profil: {
         id: "Id technique du profil",
         typeProfilCode: "TypeProfilCode"

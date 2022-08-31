@@ -3,19 +3,15 @@
 #
 
 ---
-module: Utilisateur
+module: Securite.Utilisateur
 tags:
   - autoTag
-uses:
-  - Decorators
 
 ---
 class:
   name: UtilisateurDto
   comment: Objet non persisté de communication avec le serveur
   label: Utilisateur
-  decorators:
-    - InterfaceDest
   properties:
 
     - name: Id

@@ -19,21 +19,21 @@ export const UtilisateurDtoEntity = {
         name: "id",
         domain: DO_ID,
         isRequired: false,
-        label: "utilisateur.utilisateur.id"
+        label: "securite.utilisateur.utilisateur.id"
     },
     email: {
         type: "field",
         name: "email",
         domain: DO_EMAIL,
         isRequired: true,
-        label: "utilisateur.utilisateur.email"
+        label: "securite.utilisateur.utilisateur.email"
     },
     typeUtilisateurCode: {
         type: "field",
         name: "typeUtilisateurCode",
         domain: DO_CODE,
         isRequired: true,
-        label: "utilisateur.utilisateur.typeUtilisateurCode"
+        label: "securite.utilisateur.utilisateur.typeUtilisateurCode"
     },
     utilisateurParent: {
         type: "object",

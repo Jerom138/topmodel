@@ -3,7 +3,7 @@
 #
 
 ---
-module: Utilisateur
+module: Securite.Utilisateur
 tags:
   - autoTag
 

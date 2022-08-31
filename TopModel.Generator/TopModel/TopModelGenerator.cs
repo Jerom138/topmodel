@@ -24,33 +24,218 @@ public class TopModelGenerator : GeneratorBase
 
     public override string Name => "TopModelGenerator";
 
-    public override IEnumerable<string> GeneratedFiles => _files.Where(f => f.Value.Classes.Any() || f.Value.Endpoints.Any()).Select(f => GetFilePath(f.Value));
+    public override IEnumerable<string> GeneratedFiles =>
+        _files.SelectMany(f => f.Value.Classes.Where(c => c.Reference)).Select(c => GetFilePathReferences(c.ModelFile.Module))
+    .Concat(
+        _files.SelectMany(f => f.Value.Classes.Where(c => c.IsPersistent && !c.Reference)).Select(c => GetFilePathEntities(c.ModelFile.Module))
+    )
+    .Concat(
+        _files.SelectMany(f => f.Value.Classes.Where(c => !c.IsPersistent && !c.Reference)).Select(c => GetFilePathDtos(c.ModelFile.Module))
+    ).Concat(
+        _files.Where(f => f.Value.Endpoints.Any()).Select(f => GetFilePathEndPoint(f.Value))
+    );
 
     protected override void HandleFiles(IEnumerable<ModelFile> files)
     {
         foreach (var file in files.Where(f => f.Classes.Any() || f.Endpoints.Any()))
         {
             _files[file.Name] = file;
-            GenerateFile(file);
+            if (file.Endpoints.Any())
+            {
+                GenerateEndpoints(file);
+            }
+        }
+
+        var modules = files.SelectMany(f => f.Classes.Select(c => c.Namespace.Module)).Distinct();
+
+        foreach (var module in modules)
+        {
+            GenerateModule(module);
         }
     }
 
-    private string GetFilePath(ModelFile file)
+
+    private string GetFilePathReferences(string module)
     {
-        return $"{GetDestinationFolder(file)}\\{file.Name.Split("/").Last()}.tmd";
+        return $"{GetDestinationFolder(module)}\\{FileNameReferences}.tmd";
     }
 
-    private string GetDestinationFolder(ModelFile file)
+    private string GetFilePathEntities(string module)
     {
-        return Path.Combine(_config.ModelOutputDirectory!, string.Join("/", file.Name.Split("/").SkipLast(1)));
+        return $"{GetDestinationFolder(module)}\\{FileNameEntities}.tmd";
+    }
+
+    private string GetFilePathDtos(string module)
+    {
+        return $"{GetDestinationFolder(module)}\\{FileNameDtos}.tmd";
+    }
+
+    private string GetDestinationFolder(string module)
+    {
+        return Path.Combine(_config.ModelOutputDirectory!, string.Join("/", module.Split(".")));
+    }
+
+    private string GetFilePathEndPoint(ModelFile file)
+    {
+        return $"{GetDestinationFolder(file.Module)}\\{file.Name.Split('/').Last()}.tmd";
+    }
+
+    private string FileNameReferences = "01_References";
+    private string FileNameEntities = "02_Entities";
+    private string FileNameDtos = "03_Dtos";
+
+    private void GenerateModule(string module)
+    {
+        var destFolder = GetDestinationFolder(module);
+        Directory.CreateDirectory(destFolder);
+
+        GenerateReferences(module);
+        GeneratePersistentClasses(module);
+        GenerateDtoClasses(module);
+    }
+
+    private string GetImport(Class classe)
+    {
+        var relativePath = string.Join('/', classe.ModelFile.Module.Split('.'));
+        if (classe.Reference)
+        {
+            return $"{relativePath}/{FileNameReferences}";
+        }
+        else if (classe.IsPersistent)
+        {
+            return $"{relativePath}/{FileNameEntities}";
+        }
+        else
+        {
+            return $"{relativePath}/{FileNameDtos}";
+        }
+    }
+
+    private List<Class> GetReferencedClassses(List<Class> classes)
+    {
+        return classes.SelectMany(c => c.Properties).Where(p => p is AliasProperty || p is CompositionProperty || p is AssociationProperty).Select(p =>
+                {
+                    switch (p)
+                    {
+                        case AssociationProperty ap:
+                            return ap.Association;
+                        case AliasProperty al:
+                            return al.Property.Class;
+                        case CompositionProperty cp:
+                            return cp.Composition;
+                        default:
+                            return null;
+                    }
+                })
+                .Concat(classes.Where(c => c.Extends != null).Select(c => c.Extends))
+                .Where(c => c != null)
+                .Where(c => IsAvailable(c!))
+                .Distinct().ToList()!;
+    }
+
+    private void InitFileModule(string module, FileWriter fw)
+    {
+        fw.WriteLine("---");
+        fw.WriteLine($"module: {module}");
+        fw.WriteLine($"tags:");
+        fw.WriteLine($"  - {_config.Tag}");
+    }
+
+    private void GenerateReferences(string module)
+    {
+        var classes = this._files.Where(f => f.Value.Module == module).SelectMany(f => f.Value.Classes).Where(c => c.Reference).ToList();
+        WriteClasses(module, GetFilePathReferences(module), classes);
+    }
+
+    private void GeneratePersistentClasses(string module)
+    {
+        var classes = this._files.Where(f => f.Value.Module == module).SelectMany(f => f.Value.Classes).Where(c => c.IsPersistent && !c.Reference).ToList();
+        WriteClasses(module, GetFilePathEntities(module), classes);
+    }
+
+    private void GenerateDtoClasses(string module)
+    {
+        var classes = this._files.Where(f => f.Value.Module == module).SelectMany(f => f.Value.Classes).Where(c => !c.IsPersistent && !c.Reference).ToList();
+        WriteClasses(module, GetFilePathDtos(module), classes);
+    }
+
+    private void WriteClasses(string module, string filePath, List<Class> classes)
+    {
+        using var fw = new FileWriter(filePath, _logger)
+        {
+            StartCommentToken = "#"
+        };
+        InitFileModule(module, fw);
+        var hasDecoratorImport = classes.SelectMany(c => c.Decorators).Any(d => _config.Decorators.Any(cd => cd.From == d.Name.ToString()));
+        var referencedClasses = GetReferencedClassses(classes.ToList());
+        var imports = referencedClasses.Select(c => GetImport(c!)).Where(i => i != GetImport(classes.First()));
+        if (imports.Any() || hasDecoratorImport)
+        {
+            fw.WriteLine($"uses:");
+            imports.OrderBy(i => i).ToList().ForEach(u =>
+            {
+                fw.WriteLine($"  - {u}");
+            });
+            classes.SelectMany(c => c.Decorators).Select(d => _config.Decorators.Find(cd => cd.From == d.Name.ToString())).Where(d => d != null).ToList().ForEach(d =>
+            {
+                fw.WriteLine($"  - {d!.Import}");
+            });
+        }
+
+        foreach (Class classe in classes)
+        {
+            WriteClasse(classe, fw);
+        }
+    }
+    private void GenerateEndpoints(ModelFile file)
+    {
+        using var fw = new FileWriter(GetFilePathEndPoint(file), _logger)
+        {
+            StartCommentToken = "#"
+        };
+        InitFileModule(file.Module, fw);
+
+        var referencedClasses = file.Endpoints.SelectMany(e => e.Params).Concat(file.Endpoints.Select(e => e.Returns))
+            .Where(p => p != null)!.Where(p => p is AliasProperty || p is CompositionProperty || p is AssociationProperty).Select(p =>
+                {
+                    switch (p)
+                    {
+                        case AssociationProperty ap:
+                            return ap.Association;
+                        case AliasProperty al:
+                            return al.Property.Class;
+                        case CompositionProperty cp:
+                            return cp.Composition;
+                        default:
+                            return null;
+                    }
+                })
+                .Where(c => c != null)
+                .Where(c => IsAvailable(c!))
+                .Distinct().ToList()!;
+        var imports = referencedClasses.Select(c => GetImport(c!));
+        if (imports.Any())
+        {
+            fw.WriteLine($"uses:");
+            imports.OrderBy(i => i).ToList().ForEach(u =>
+            {
+                fw.WriteLine($"  - {u}");
+            });
+        }
+
+        foreach (Endpoint endpoint in file.Endpoints)
+        {
+            WriteEndpoint(endpoint, fw);
+        }
+
     }
 
     private void GenerateFile(ModelFile file)
     {
-        var destFolder = GetDestinationFolder(file);
-        Directory.CreateDirectory(destFolder);
+        // var destFolder = GetDestinationFolder(file);
+        // Directory.CreateDirectory(destFolder);
 
-        using var fw = new FileWriter($"{GetFilePath(file)}", _logger)
+        using var fw = new FileWriter($"", _logger)
         {
             StartCommentToken = "#"
         };

@@ -2,7 +2,7 @@
 //// ATTENTION CE FICHIER EST GENERE AUTOMATIQUEMENT !
 ////
 
-package topmodel.exemple.name.dao.entities.securite;
+package topmodel.exemple.name.dao.entities.securite.profil;
 
 import javax.annotation.Generated;
 import javax.persistence.Column;
@@ -16,7 +16,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Immutable;
 
-import topmodel.exemple.name.dao.entities.securite.TypeProfil;
+import topmodel.exemple.name.dao.entities.securite.profil.TypeProfil;
 import topmodel.exemple.utils.IFieldEnum;
 
 /**
@@ -75,7 +75,7 @@ public class TypeProfil {
 	/**
 	 * Getter for code.
 	 *
-	 * @return value of {@link topmodel.exemple.name.dao.entities.securite.TypeProfil#code code}.
+	 * @return value of {@link topmodel.exemple.name.dao.entities.securite.profil.TypeProfil#code code}.
 	 */
 	public TypeProfil.Values getCode() {
 		return this.code;
@@ -84,14 +84,14 @@ public class TypeProfil {
 	/**
 	 * Getter for libelle.
 	 *
-	 * @return value of {@link topmodel.exemple.name.dao.entities.securite.TypeProfil#libelle libelle}.
+	 * @return value of {@link topmodel.exemple.name.dao.entities.securite.profil.TypeProfil#libelle libelle}.
 	 */
 	public String getLibelle() {
 		return this.libelle;
 	}
 
 	/**
-	 * Set the value of {@link topmodel.exemple.name.dao.entities.securite.TypeProfil#code code}.
+	 * Set the value of {@link topmodel.exemple.name.dao.entities.securite.profil.TypeProfil#code code}.
 	 * @param code value to set
 	 */
 	public void setCode(TypeProfil.Values code) {
@@ -99,7 +99,7 @@ public class TypeProfil {
 	}
 
 	/**
-	 * Set the value of {@link topmodel.exemple.name.dao.entities.securite.TypeProfil#libelle libelle}.
+	 * Set the value of {@link topmodel.exemple.name.dao.entities.securite.profil.TypeProfil#libelle libelle}.
 	 * @param libelle value to set
 	 */
 	public void setLibelle(String libelle) {
@@ -123,7 +123,7 @@ public class TypeProfil {
 	}
 
 	/**
-	 * Enumération des champs de la classe {@link topmodel.exemple.name.dao.entities.securite.TypeProfil TypeProfil}.
+	 * Enumération des champs de la classe {@link topmodel.exemple.name.dao.entities.securite.profil.TypeProfil TypeProfil}.
 	 */
 	public enum Fields implements IFieldEnum<TypeProfil> {
         CODE, //

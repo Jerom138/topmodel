@@ -3,7 +3,7 @@
 #
 
 ---
-module: Securite
+module: Securite.Profil
 tags:
   - autoTag
 uses:
